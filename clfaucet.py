@@ -27,14 +27,14 @@ def account_limit_exceed(handler):
 ip_24h_token_amount_limiter = ratelimit.RateLimitType(
     name="ip_24h_token_amount",
     amount=cfg.TOTAL_GET_TOKEN_AMOUNT_PER_IP_24H,
-    expire=60,  # 24 hours
+    expire=3600*24,  # 24 hours
     identity=lambda h: h.request.remote_ip,
     on_exceed=token_limit_exceed)
 
 account_24h_token_amount_limiter = ratelimit.RateLimitType(
     name="account_24h_token_amount",
     amount=cfg.TOTAL_GET_TOKEN_COUNT_PER_ACCOUNT_24H,
-    expire=60,  # 24 hours
+    expire=3600*24,  # 24 hours
     identity=lambda h: h.request.arguments.keys()[0] if len(h.request.arguments.keys()) == 1 else '',
     on_exceed=account_limit_exceed)
 
@@ -75,7 +75,6 @@ class GetTokenHandler(tornado.web.RequestHandler):
 
     def _os_cmd_transfer(self, param):
         cmd = 'echo "%s" |  dipcli send %s %s %dpdip -y' % (FROM_PASSWORD, cfg.FROM_ACCOUNT, param['to'], param['quantity'])
-        print cmd
         output = os.popen(cmd).read()
         js = json.loads(output)
         return True, js['txhash']
