@@ -12,7 +12,7 @@ redis-server &
 
 # setup config.ini file
 
-# start clfacet.py
+# start main.py
 python main.py 1>result.log 2>&1
 input password of from account, main process will be in demon mode
 ```
