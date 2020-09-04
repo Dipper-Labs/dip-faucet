@@ -11,7 +11,7 @@ import handler
 
 def make_app():
     return tornado.web.Application([
-        (r"/get_token", handler.GetTokenHandler),
+        (r"/dip/get_token", handler.GetTokenHandler),
     ])
 
 
