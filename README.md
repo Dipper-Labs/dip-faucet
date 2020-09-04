@@ -10,8 +10,11 @@ git clone https://github.com/Dipper-Labs/dip-faucet.git && cd dip-faucet
 # start redis
 redis-server &
 
-# start clfacet.py
-python clfaucet.py 1>result.log 2>&1 &
+# setup config.ini file
+
+# start main.py
+python main.py 1>result.log 2>&1
+input password of from account, main process will be in demon mode
 ```
 
 ## client side
