@@ -24,7 +24,7 @@ def _assembly_args(data):
 
 
 def _os_cmd_transfer(param):
-    cmd = 'echo "%s" | dipcli send %s %s %dpdip -y' % (cfg.FROM_PASSWORD, cfg.FROM_ACCOUNT, param['to'], param['quantity'])
+    cmd = 'echo "%s" | dipcli send --from %s --to %s --amount %dpdip -y' % (cfg.FROM_PASSWORD, cfg.FROM_ACCOUNT, param['to'], param['quantity'])
     output = os.popen(cmd).read()
     js = json.loads(output)
     return True, js['txhash']
